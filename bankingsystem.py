@@ -86,9 +86,18 @@ def transfer():
     sender= Account.query.get(data["sender_id"]) #fetch sender account
     receiver= Account.query.get(data["receiver_id"])#fetch receiver account
     amount= data["amount"]
-    
-    if sender.balance < amount :
-       return jsonify({"message": "Insufficient Funds"}), 400 
+
+    if not sender:
+        return jsonify({"error": "Sender not found"}), 404
+
+    if not receiver:
+        return jsonify({"error": "Receiver not found"}), 404
+
+    if amount <= 0:
+        return jsonify({"error": "Invalid amount"}), 400
+
+    if sender.balance < amount:
+        return jsonify({"error": "Insufficient funds"}), 400
    
     #proper transaction handling with try-except to ensure atomicity
     try:
