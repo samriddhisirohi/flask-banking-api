@@ -118,6 +118,20 @@ def transfer():
         return jsonify({"error": "Transaction failed"}), 500  
     
     return jsonify({"message": "Transfer Successful"})
+
+
+#🧾 Get Transaction History API
+@app.route("/transactions")
+def get_transactions():
+    transactions = Transaction.query.all()
+    return jsonify([{
+        "txn_id": t.txn_id,
+        "amount": t.amount,
+        "txn_type": t.txn_type,
+        "sender_id": t.sender_id,
+        "receiver_id": t.receiver_id,
+        "timestamp": t.timestamp
+    } for t in transactions])
     
 if __name__ == "__main__":
     app.run(debug=True) #debug=True allows for easier development by providing detailed error messages and auto-reloading the server on code changes.
