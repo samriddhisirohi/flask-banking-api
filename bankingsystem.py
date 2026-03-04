@@ -77,6 +77,15 @@ def create_account():
   db.session.commit()
   return jsonify({"message": "Account created"})
 
+# get account details API
+@app.route("/accounts")
+def get_accounts():
+    accounts = Account.query.all()
+    return jsonify([{
+        "acc_id": a.acc_id,
+        "balance": a.balance
+    } for a in accounts])
+
 
 
 #💸 Transfer Money API
