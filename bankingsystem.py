@@ -64,6 +64,31 @@ def create_user():
   return jsonify({"message": "User created"})
 
 
+# get user details API
+@app.route("/users", methods=["GET"])
+def get_users():
+    users = User.query.all()
+
+    result = []
+
+    for user in users:
+        result.append({
+            "id": user.id,
+            "name": user.name,
+            "accounts": [
+                {
+                    "acc_id": acc.acc_id,
+                    "balance": acc.balance
+                }
+                for acc in user.accounts
+            ]
+        })
+
+    return jsonify(result)
+
+
+
+
 
 #🧾 Create Account API
 @app.route("/create_account",methods=["POST"])
