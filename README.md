@@ -6,7 +6,7 @@ This backend application allows users to create accounts and perform fund transf
 
 ---
 
-## 🚀 Features
+##  Features
 
 - Create Users
 - Create Bank Accounts
@@ -19,7 +19,7 @@ This backend application allows users to create accounts and perform fund transf
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 - Python
 - Flask
